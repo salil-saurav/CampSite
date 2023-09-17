@@ -18,15 +18,29 @@ const mongoSanitize = require("express-mongo-sanitize");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
+const dbUrl = process.env.DB_URL;
 
 const MongoDBStore = require("connect-mongo")(session);
 
-main().catch((err) => console.log(err));
+// main().catch((err) => console.log(err));
 
-async function main() {
-  await mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp");
-  console.log("Database connected");
-}
+// async function main() {
+//   await mongoose.connect(dbUrl);
+//   console.log("Database connected");
+// }
+
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  useCreateIndex: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
+
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "Connection Error"));
+db.once("open", () => {
+  console.log("Database Connected ");
+});
 
 const app = express();
 
@@ -45,7 +59,7 @@ app.use(
 const secret = process.env.SECRET || "thisshouldbeabettersecret!";
 
 const store = new MongoDBStore({
-  url: 'mongodb://127.0.0.1:27017/yelp-camp',
+  url: "mongodb://127.0.0.1:27017/yelp-camp",
   secret,
   touchAfter: 24 * 60 * 60,
 });
