@@ -22,13 +22,6 @@ const dbUrl = process.env.DB_URL;
 
 const MongoDBStore = require("connect-mongo")(session);
 
-// main().catch((err) => console.log(err));
-
-// async function main() {
-//   await mongoose.connect(dbUrl);
-//   console.log("Database connected");
-// }
-
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
