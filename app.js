@@ -18,7 +18,6 @@ const mongoSanitize = require("express-mongo-sanitize");
 const userRoutes = require("./routes/users");
 const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
-// const dbUrl = "mongodb+srv://salilsauravofficial:sargan-Wyfkes-7dyjxy@cluster0.87kj4nh.mongodb.net/?retryWrites=true&w=majority"
 const url = process.env.DB_URL;
 // nPoe2HKvUGDMIZND
 
